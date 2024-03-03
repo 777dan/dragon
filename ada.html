@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let startTime = Date.now();
+
+        function animate() {
+            let currentTime = Date.now() - startTime;
+            let elapsedTime = currentTime % 2000; // Визначаємо час, що минув з початку анімації
+
+            // Використовуємо функцію косинуса для плавного змінення значень від 0 до 1 і назад
+            let value = Math.cos(elapsedTime * Math.PI / 2000) / 2 + 0.5;
+
+            console.log(value.toFixed(2), elapsedTime); // Виводимо значення з округленням до двох знаків після коми
+
+            if (currentTime < 4000) { // Анімація триває 4 секунди (2000 мс для збільшення, 2000 мс для зменшення)
+                requestAnimationFrame(animate);
+            }
+        }
+
+        animate();
+
+    </script>
+</body>
+
+</html>
