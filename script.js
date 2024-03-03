@@ -51,7 +51,11 @@ const createNewHills = () => {
   for (let i = 0; i < 3; i++) {
     hills.height.push(getRandInt(50, 20));
     hills.width.push(getRandInt(20, 40));
-    hills.x.push(hills.x[3 - i] - getRandInt(150, 250));
+    if (i === 0) {
+      hills.x.push(getRandInt(150, 250));
+    } else {
+      hills.x.push(hills.x[i - 1] + getRandInt(120, 200));
+    }
   }
 }
 
@@ -61,7 +65,6 @@ createNewHills();
 function drawHill(context, x, num) {
   w = hills.width[num - 1];
   h = hills.height[num - 1];
-  // x = hills.x[num - 1];
   checkCollision(dragon_x, x, w);
   context.beginPath();
   context.strokeStyle = "#000";
@@ -81,7 +84,7 @@ function animateDragon(context, canvas, speed) {
   drawGrass(context); // Рисуем траву
   // Рисуем холмы
   for (let i = 1; i <= 3; i++) {
-    drawHill(context, position_x + hills.x[i], i);
+    drawHill(context, position_x + hills.x[i - 1], i);
   }
 
   if (position_x + 490 + 50 > 0) {
@@ -90,7 +93,7 @@ function animateDragon(context, canvas, speed) {
     position_x = canvas.width;
     createNewHills();
   }
-  console.log(position_x);
+  // console.log(position_x);
 }
 function stop() {
   clearInterval(timer);
