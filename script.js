@@ -11,6 +11,9 @@ let dragon_h = 46;
 let dragon_y = 100;
 let grass_y = 205;
 
+const startButt = document.querySelector('#start-butt');
+startButt.addEventListener('click', () => location.reload());
+
 // Направления движения, задаются стрелками клавиатуры
 let directions = {
   ArrowLeft: "left",
@@ -101,13 +104,12 @@ function stop() {
 
 function start(canvas, context) {
   stop();
-  // timer = setInterval(animateDragon.bind(this, context, canvas), 1000);
   timer = setInterval(animateDragon, 10, context, canvas, speed);
 }
 
 function checkCollision(coord1, coord2, width) {
   if (coord1 > coord2 && coord1 < coord2 + width && up == 0) {
-    alert("collision");
+    alert("Game over");
     stop();
     return;
   }
@@ -118,13 +120,6 @@ window.onload = function () {
   let context = canvas.getContext("2d");
   canvas.width = screen.width;
   if (canvas && context) {
-    // start();
-    // drawDragon(context, 200, grass_y);
-    // drawGrass(context);
-    // drawHill(context, 300, 100, 30);
-    // drawHill(context, 700, 50, 30);
-    // drawHill(context, 1200, 200, 80);
-    //animateDragon(context, speed);
     start(canvas, context);
   }
 };
